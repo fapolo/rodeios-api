@@ -5,20 +5,21 @@ const resultadoSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Rodeio"
   },
-  modalidade: String
-
-  //   estrutura para dados:
-
-  //   dados: {
-  //       id_entidade: {
-  //           correcao,
-  //           harmonia,
-  //           interpretacao,
-  //           musica,
-  //           descontos,
-  //           final
-  //       }
-  //   }
+  modalidade: String,
+  dados: [
+    {
+      entidade: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Entidade"
+      },
+      correcao: Number,
+      harmonia: Number,
+      interpretacao: Number,
+      musica: Number,
+      descontos: Number,
+      final: Number
+    }
+  ]
 });
 
 module.exports = mongoose.model("Rodeio", resultadoSchema);

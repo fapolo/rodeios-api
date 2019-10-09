@@ -36,6 +36,6 @@ Compreende todos os rodeios cadastrados. Parâmetros cadastrados no banco de dad
 **`- GET /rodeios`**<br />
 Lista todos os rodeios existentes no banco de dados.<br />
 **`- POST /rodeios`**:<br />
-Cria um novo rodeio. É necessário passar os parâmetros `nome`, `data` (no formato Date) e `organizador`, que é o ID da entidade organizadora do evento. Obtenha o ID da entidade cadastrando uma nova ou recuperando o ID através das rotas **Entidade**.<br />
+Cria um novo rodeio. É necessário passar os parâmetros `nome`, `data` (no formato Date) e `organizador`, que é o ID da entidade organizadora do evento. Obtenha o ID cadastrando uma nova ou recuperando através das rotas **Entidade**.<br />
 **`- PUT /rodeios/:id_rodeio`**:<br />
 Atualiza o rodeio especificado pelo ID informado na rota.<br />
