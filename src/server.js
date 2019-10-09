@@ -1,14 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const routes = require("./routes");
 
-const server = express();
+const app = express();
 require("dotenv/config");
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
+  useFindAndModify: false,
   useUnifiedTopology: true
 });
 
-server.listen(process.env.PORT, () =>
+app.use(express.json());
+app.use(routes);
+
+app.listen(process.env.PORT, () =>
   console.log("--- Servidor Site dos Rodeios iniciado ---")
 );
