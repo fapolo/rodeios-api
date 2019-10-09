@@ -22,4 +22,4 @@ const resultadoSchema = new mongoose.Schema({
   ]
 });
 
-module.exports = mongoose.model("Rodeio", resultadoSchema);
+module.exports = mongoose.model("Resultado", resultadoSchema);

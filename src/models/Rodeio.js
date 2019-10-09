@@ -7,10 +7,11 @@ const rodeioSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Entidade"
   },
-  resultado: {
+  resultado: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Resultado"
   }
+]
 });
 
 module.exports = mongoose.model("Rodeio", rodeioSchema);

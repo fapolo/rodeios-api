@@ -8,10 +8,12 @@ const entidadeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Rodeio"
   },
-  conquistas: {
+  conquistas: [
+    {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Resultado"
   }
+  ]
 });
 
 module.exports = mongoose.model("Entidade", entidadeSchema);
