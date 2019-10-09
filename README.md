@@ -16,6 +16,9 @@ Compreende todas as entidades tradicionalistas cadastradas. Parâmetros cadastra
 
 ### Rotas
 
-**`- GET /entidades`**: Lista todas as entidades existentes no banco de dados. É possível passar parâmetros para busca, especificando um ou mais dos três parâmetros listados acima.<br />
-**`- POST /entidades`**: Cria uma nova entidade. É necessário passar os parâmetros `nome` e `cidade`. O parâmetro `rt` será definido automaticamente com base na cidade informada.<br />
-**`- PUT /entidades/:id_entidade`**: Atualiza a entidade especificada pelo ID informado na rota.<br />
+**`- GET /entidades`**<br />
+Lista todas as entidades existentes no banco de dados. É possível passar parâmetros para busca, especificando um ou mais dos três parâmetros listados acima.<br />
+**`- POST /entidades`**:<br />
+Cria uma nova entidade. É necessário passar os parâmetros `nome` e `cidade`. O parâmetro `rt` será definido automaticamente com base na cidade informada.<br />
+**`- PUT /entidades/:id_entidade`**:<br />
+Atualiza a entidade especificada pelo ID informado na rota.<br />
