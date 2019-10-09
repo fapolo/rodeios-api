@@ -3,7 +3,10 @@ const Rodeio = require("../models/Rodeio");
 module.exports = {
   async index(req, res) {
     try {
-      const response = await Rodeio.find({}).populate("organizador");
+      const response = await Rodeio.find({}).populate(
+        "organizador resultado",
+        "nome modalidade dados"
+        );
       return res.json(response);
     } catch (error) {
       console.log("---> ERRO ao recuperar rodeios:");
