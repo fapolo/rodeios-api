@@ -1,6 +1,22 @@
 const Entidade = require("../models/Entidade");
 
 module.exports = {
+  async index(req, res) {
+    try {
+      const { nome, cidade, rt } = req.query;
+
+      const response = await Entidade.find({
+        $or: [{ nome }, { cidade }, { rt }]
+      });
+      return res.json(response);
+    } catch (error) {
+      console.log("---> ERRO ao recuperar entidades:");
+      console.log(error);
+      console.log("-----------------------");
+      return res.status(500).json({ message: "Erro ao recuperar entidades." });
+    }
+  },
+
   async store(req, res) {
     try {
       const { nome, cidade, rt } = req.body;
