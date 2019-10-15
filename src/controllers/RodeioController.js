@@ -1,4 +1,5 @@
 const Rodeio = require("../models/Rodeio");
+const Entidade = require("../models/Entidade");
 
 module.exports = {
   async index(req, res) {
@@ -6,7 +7,7 @@ module.exports = {
       const response = await Rodeio.find({}).populate(
         "organizador resultado",
         "nome modalidade dados"
-        );
+      );
       return res.json(response);
     } catch (error) {
       console.log("---> ERRO ao recuperar rodeios:");
@@ -40,6 +41,24 @@ module.exports = {
       console.log(error);
       console.log("-----------------------");
       return res.status(500).json({ message: "Erro ao criar novo rodeio." });
+    }
+  },
+
+  async show(req, res) {
+    try {
+      const rodeio = await Rodeio.findById(req.params.rodeio_id).populate(
+        "organizador resultado"
+      );
+      if (!rodeio) {
+        return res.status(400).json({ message: "Rodeio não localizado." });
+      }
+
+      return res.json(rodeio);
+    } catch (error) {
+      console.log("---> ERRO ao localizar rodeio:");
+      console.log(error);
+      console.log("-----------------------");
+      return res.status(500).json({ message: "Erro ao localizar rodeio." });
     }
   },
 

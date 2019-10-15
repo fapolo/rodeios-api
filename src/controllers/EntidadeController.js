@@ -50,6 +50,22 @@ module.exports = {
     }
   },
 
+  async show(req, res) {
+    try {
+      const entidade = await Entidade.findById(req.params.entidade_id);
+      if (!entidade) {
+        return res.status(400).json({ message: "Entidade não localizada." });
+      }
+
+      return res.json(entidade);
+    } catch (error) {
+      console.log("---> ERRO ao localizar entidade:");
+      console.log(error);
+      console.log("-----------------------");
+      return res.status(500).json({ message: "Erro ao localizar entidade." });
+    }
+  },
+
   async update(req, res) {
     try {
       const entidade = await Entidade.findById(req.params.entidade_id);
