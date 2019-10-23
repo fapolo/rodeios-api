@@ -47,7 +47,7 @@ module.exports = {
   async show(req, res) {
     try {
       const rodeio = await Rodeio.findById(req.params.rodeio_id).populate(
-        "organizador resultado"
+        "resultado"
       );
       if (!rodeio) {
         return res.status(400).json({ message: "Rodeio não localizado." });
