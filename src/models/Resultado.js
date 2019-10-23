@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 
 const resultadoSchema = new mongoose.Schema({
   rodeio: {
-    rodeio_id: {
+    id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Rodeio"
     },
-    rodeio_nome: String
+    nome: String
   },
   modalidade: String,
   dados: [
     {
       entidade: {
-        entidade_id: {
+        id: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Entidade"
         },
@@ -22,7 +22,7 @@ const resultadoSchema = new mongoose.Schema({
       harmonia: Number,
       interpretacao: Number,
       musica: Number,
-      descontos: Number,
+      desconto: Number,
       final: Number
     }
   ]

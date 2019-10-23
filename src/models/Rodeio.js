@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const rodeioSchema = new mongoose.Schema({
   nome: String,
   data: Date,
-  organizador: {
-    rodeio_id: {
+  entidade: {
+    id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Entidade"
     },
@@ -12,7 +12,7 @@ const rodeioSchema = new mongoose.Schema({
   },
   resultado: [
     {
-      resultado_id: {
+      id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Resultado"
       },
