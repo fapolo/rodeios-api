@@ -97,6 +97,12 @@ async function cadastraItens() {
       });
       newRodeio.entidade.id = foundEntidade._id;
       await newRodeio.save();
+
+      const newRodeioData = {id: newRodeio._id, nome: newRodeio.nome };
+
+      foundEntidade.rodeios.push(newRodeioData);
+      foundEntidade.save();
+
       return console.log(`-> Rodeio '${newRodeio.nome}' cadastrado.`);
     });
   };
@@ -106,17 +112,34 @@ async function cadastraItens() {
     resultados.map(async resultado => {
       const newResultado = await Resultado.create(resultado);
 
-      //calcula nota FINAl para cada entrada do resultado
+      //calcula nota FINAl para cada entrada
       newResultado.dados.map(entrada => {
         const { correcao, harmonia, interpretacao, musica, desconto } = entrada;
-        entrada.final = correcao + harmonia + interpretacao + musica - desconto;
+        return entrada.final = correcao + harmonia + interpretacao + musica - desconto;
       });
 
-      await newResultado.save();
+      //Adiciona o ID do RESULTADO na ENTIDADE localizada
+      newResultado.dados.map(async entrada => {
+        const foundEntidade = await Entidade.findOne({nome: entrada.entidade.nome});
+        foundEntidade.resultados.push(newResultado._id);
+        return await foundEntidade.save();
+      });
 
+      //Adiciona o ID da ENTIDADE na entrada correspondente a ela
+      newResultado.dados.map(async entrada => {
+      const foundEntidade = await Entidade.findOne({nome: entrada.entidade.nome});
+      return entrada.entidade.id = foundEntidade._id;
+      })
+
+      //adiciona o ID do RESULTADO no RODEIO correspondente
       const foundRodeio = await Rodeio.findOne({ nome: resultado.rodeio.nome });
       foundRodeio.resultado.push(newResultado._id);
       await foundRodeio.save();
+
+      //adiciona o ID do RODEIO para o resultado
+      newResultado.rodeio.id = foundRodeio._id;
+
+      await newResultado.save();
 
       return console.log(
         `-> Resultado '${newResultado.modalidade}' adicionado para o rodeio '${newResultado.rodeio.nome}'.`

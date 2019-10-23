@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const resultadoSchema = new mongoose.Schema({
   rodeio: {
+    _id: false,
     id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Rodeio"
@@ -11,6 +12,7 @@ const resultadoSchema = new mongoose.Schema({
   modalidade: String,
   dados: [
     {
+      _id: false,
       entidade: {
         id: {
           type: mongoose.Schema.Types.ObjectId,

@@ -12,11 +12,8 @@ const rodeioSchema = new mongoose.Schema({
   },
   resultado: [
     {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Resultado"
-      },
-      modalidade: String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Resultado"
     }
   ]
 });

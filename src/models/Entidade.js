@@ -6,20 +6,18 @@ const entidadeSchema = new mongoose.Schema({
   rt: Number,
   rodeios: [
     {
+      _id: false,
       id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Rodeio"
       },
       nome: String
-    }
+    },
   ],
   resultados: [
     {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Resultado"
-      },
-      rodeio_nome: String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Resultado"
     }
   ]
 });
