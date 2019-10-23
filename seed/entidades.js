@@ -1,0 +1,64 @@
+const entidades = [
+    {
+      nome: "CTG Tiarayú",
+      cidade: "Porto Alegre",
+      rt: 1
+    },
+    {
+      nome: "CTG M'Bororé",
+      cidade: "Campo Bom",
+      rt: 30
+    },
+    {
+      nome: "CPF Piá do Sul",
+      cidade: "Santa Maria",
+      rt: 13
+    },
+    {
+      nome: "CTG Aldeia dos Anjos",
+      cidade: "Porto Alegre",
+      rt: 1
+    },
+    {
+      nome: "CTG Rancho da Saudade",
+      cidade: "Cachoeirinha",
+      rt: 1
+    },
+    {
+      nome: "DTG Poncho Verde",
+      cidade: "Panambi",
+      rt: 9
+    },
+    {
+      nome: "CTG Heróis Farroupilhas",
+      cidade: "Caxias do Sul",
+      rt: 25
+    },
+    {
+      nome: "CTG Lalau Miranda",
+      cidade: "Passo Fundo",
+      rt: 7
+    },
+    {
+      nome: "CTG Tropeiro Velho",
+      cidade: "Panambi",
+      rt: 9
+    },
+    {
+      nome: "DT Querência das Dores",
+      cidade: "Santa Maria",
+      rt: 13
+    },
+    {
+      nome: "CTG Ronda Charrua",
+      cidade: "Farroupilha",
+      rt: 25
+    },
+    {
+      nome: "PTG Bocal de Prata",
+      cidade: "Osório",
+      rt: 23
+    }
+  ];
+
+  module.exports = entidades;

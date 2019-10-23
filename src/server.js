@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const routes = require("./routes");
-const { seedDB } = require("../seedDB");
+const { seedDB } = require("../seed/seedDB");
 
 const app = express();
 require("dotenv/config");

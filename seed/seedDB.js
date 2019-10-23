@@ -1,64 +1,10 @@
-const Entidade = require("./src/models/Entidade");
-const Rodeio = require("./src/models/Rodeio");
-const Resultado = require("./src/models/Resultado");
+const Entidade = require("../src/models/Entidade");
+const Rodeio = require("../src/models/Rodeio");
+const Resultado = require("../src/models/Resultado");
 
-const entidades = [
-  {
-    nome: "CTG Tiarayú",
-    cidade: "Porto Alegre",
-    rt: 1
-  },
-  {
-    nome: "CTG M'Bororé",
-    cidade: "Campo Bom",
-    rt: 30
-  },
-  {
-    nome: "CPF Piá do Sul",
-    cidade: "Santa Maria",
-    rt: 13
-  },
-  {
-    nome: "CTG Aldeia dos Anjos",
-    cidade: "Porto Alegre",
-    rt: 1
-  },
-  {
-    nome: "CTG Rancho da Saudade",
-    cidade: "Cachoeirinha",
-    rt: 1
-  },
-  {
-    nome: "DTG Poncho Verde",
-    cidade: "Panambi",
-    rt: 9
-  }
-];
-
-const rodeios = [
-  {
-    nome: "XXI Sarau de Arte Gaúcha",
-    data: new Date(2019, 06, 09, 0, 0, 0, 0),
-    entidade: { nome: "CTG M'Bororé" }
-  }
-];
-
-const resultados = [
-  {
-    rodeio: { nome: "XXI Sarau de Arte Gaúcha" },
-    modalidade: "Danças Tradicionais Adulto - Força A",
-    dados: [
-      {
-        entidade: { nome: "CTG Tiarayú" },
-        correcao: 9,
-        harmonia: 11.7,
-        interpretacao: 23.722,
-        musica: 3,
-        desconto: 0
-      }
-    ]
-  }
-];
+const entidades = require("./entidades");
+const rodeios = require("./rodeios");
+const resultados = require('./resultados');
 
 //==================================================
 // FUNCAO PARA LIMPAR DB
