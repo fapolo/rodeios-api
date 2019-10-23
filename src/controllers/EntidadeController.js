@@ -3,16 +3,7 @@ const Entidade = require("../models/Entidade");
 module.exports = {
   async index(req, res) {
     try {
-      const { nome, cidade, rt } = req.query;
-      let response;
-
-      if (nome || cidade || rt) {
-        response = await Entidade.find({
-          $or: [{ nome }, { cidade }, { rt }]
-        });
-      } else {
-        response = await Entidade.find({});
-      }
+      const response = await Entidade.find({});
 
       return res.json(response);
     } catch (error) {
