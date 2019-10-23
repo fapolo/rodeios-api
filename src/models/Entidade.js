@@ -4,15 +4,23 @@ const entidadeSchema = new mongoose.Schema({
   nome: String,
   cidade: String,
   rt: Number,
-  eventos: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Rodeio"
-  },
+  eventos: [
+    {
+      rodeio_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Rodeio"
+      },
+      rodeio_nome: String
+    }
+  ],
   conquistas: [
     {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Resultado"
-  }
+      resultado_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Resultado"
+      },
+      rodeio_nome: String
+    }
   ]
 });
 

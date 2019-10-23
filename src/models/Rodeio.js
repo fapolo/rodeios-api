@@ -4,14 +4,21 @@ const rodeioSchema = new mongoose.Schema({
   nome: String,
   data: Date,
   organizador: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Entidade"
+    rodeio_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Entidade"
+    },
+    nome: String
   },
-  resultado: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Resultado"
-  }
-]
+  resultado: [
+    {
+      resultado_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Resultado"
+      },
+      modalidade: String
+    }
+  ]
 });
 
 module.exports = mongoose.model("Rodeio", rodeioSchema);
