@@ -14,6 +14,7 @@ routes.get("/rodeios", rodeioController.index);
 routes.post("/rodeios", rodeioController.store);
 routes.get("/rodeios/:rodeio_id", rodeioController.show);
 routes.put("/rodeios/:rodeio_id", rodeioController.update);
+routes.delete("/rodeios/:rodeio_id", rodeioController.delete);
 
 routes.post("/resultados/", resultadoController.store);
 

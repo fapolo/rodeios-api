@@ -1,5 +1,6 @@
 const Rodeio = require("../models/Rodeio");
 const Entidade = require("../models/Entidade");
+const Resultado = require("../models/Resultado");
 
 module.exports = {
   async index(req, res) {
@@ -86,6 +87,43 @@ module.exports = {
       console.log(error);
       console.log("-----------------------");
       return res.status(500).json({ message: "Erro ao atualizar entidade." });
+    }
+  },
+
+  async delete(req, res) {
+    try {
+      //procura pelo rodeio passado
+      const rodeio = await Rodeio.findById(req.params.rodeio_id).populate(
+        "resultado"
+      );
+      if (!rodeio) {
+        return res.status(400).json({ message: "Rodeio não localizado." });
+      }
+
+      //remover a entrada de resultado das entidades que participaram do rodeio
+      const { resultado } = rodeio;
+      resultado.map(async modalidade => {
+        modalidade.dados.map(async entrada => {
+          const entidade = await Entidade.findById(entrada.entidade.id);
+          entidade.resultados = entidade.resultados.filter(
+            result => result.toString() !== modalidade._id.toString()
+          );
+          await entidade.save();
+        });
+
+        //remover o resultado do rodeio
+        await Resultado.findByIdAndDelete(modalidade._id);
+      });
+
+      //remover o rodeio
+      await Rodeio.findByIdAndDelete(req.params.rodeio_id);
+
+      return res.status(200).json({ message: "Rodeio removido." });
+    } catch (error) {
+      console.log("---> ERRO ao remover rodeio:");
+      console.log(error);
+      console.log("-----------------------");
+      return res.status(500).json({ message: "Erro ao remover rodeio." });
     }
   }
 };
