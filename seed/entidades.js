@@ -58,6 +58,31 @@ const entidades = [
       nome: "PTG Bocal de Prata",
       cidade: "Osório",
       rt: 23
+    },
+    {
+      nome: "CTG Candeeiro da Amizade",
+      cidade: "Vera Cruz",
+      rt: 5
+    },
+    {
+      nome: "CTG Os Gaudérios",
+      cidade: "Cachoeira do Sul",
+      rt: 5
+    },
+    {
+      nome: "CTG Caiboaté",
+      cidade: "São Gabriel",
+      rt: 18
+    },
+    {
+      nome: "CTG Turíbio Veríssimo",
+      cidade: "Cruz Alta",
+      rt: 9
+    },
+    {
+      nome: "CTG Sentinela do Forte",
+      cidade: "Caçapava do Sul",
+      rt: 18
     }
   ];
 

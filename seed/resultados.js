@@ -84,7 +84,45 @@ const resultados = [
             desconto: 0
         }
       ]
+    },
+    {
+        rodeio: { nome: "XXI Sarau de Arte Gaúcha" },
+        modalidade: "Danças Tradicionais Adulto - Força B",
+        dados: [
+          {
+            entidade: { nome: "CTG Candeeiro da Amizade" },
+            correcao: 9,
+            harmonia: 5.77,
+            interpretacao: 11.734,
+            musica: 3,
+            desconto: 0
+          },
+          {
+            entidade: { nome: "CTG Os Gaudérios" },
+            correcao: 9,
+            harmonia: 5.73,
+            interpretacao: 11.697,
+            musica: 3,
+            desconto: 0
+          },
+          {
+            entidade: { nome: "CTG Caiboaté" },
+            correcao: 9,
+            harmonia: 5.73,
+            interpretacao: 11.637,
+            musica: 3,
+            desconto: 0
+          },
+          {
+            entidade: { nome: "CTG Turíbio Veríssimo" },
+            correcao: 9,
+            harmonia: 5.65,
+            interpretacao: 11.702,
+            musica: 3,
+            desconto: 0
+          }
+        ]
     }
-  ];
+]
 
   module.exports = resultados
