@@ -13,7 +13,7 @@ mongoose.connect(process.env.DATABASE_URL, {
   useUnifiedTopology: true
 });
 
-seedDB();
+// seedDB();
 
 app.use(cors());
 app.use(express.json());

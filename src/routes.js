@@ -2,6 +2,7 @@ const express = require("express");
 const entidadeController = require("./controllers/EntidadeController");
 const rodeioController = require("./controllers/RodeioController");
 const resultadoController = require("./controllers/ResultadoController");
+const regiaoController = require("./controllers/RegiaoController");
 
 const routes = express.Router();
 
@@ -21,5 +22,9 @@ routes.delete("/rodeios/:rodeio_id", rodeioController.delete);
 routes.post("/resultados/", resultadoController.store);
 //estudar update resultado ao liberar o update de rodeio no frontend, talvez endpoint dividido
 //para dados do rodeio em si (put rodeio) e aí criar (put resultado) para atualizar dados do resultado
+
+routes.get("/regioes", regiaoController.index);
+//somente para recuperar a lista de todas as cidades divididas por regiões,
+//afim de utilizar para automatização ao cadastrar uma entidade no frontent
 
 module.exports = routes;
