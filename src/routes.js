@@ -3,6 +3,7 @@ const entidadeController = require("./controllers/EntidadeController");
 const rodeioController = require("./controllers/RodeioController");
 const resultadoController = require("./controllers/ResultadoController");
 const regiaoController = require("./controllers/RegiaoController");
+const usuarioController = require("./controllers/usuarioController");
 
 const routes = express.Router();
 
@@ -25,6 +26,8 @@ routes.post("/resultados/", resultadoController.store);
 
 routes.get("/regioes", regiaoController.index);
 //somente para recuperar a lista de todas as cidades divididas por regiões,
-//afim de utilizar para automatização ao cadastrar uma entidade no frontent
+//afim de utilizar para automatização ao cadastrar uma entidade no frontend
+
+routes.post("/usuarios", usuarioController.store);
 
 module.exports = routes;

@@ -2,11 +2,12 @@ const Entidade = require("../src/models/Entidade");
 const Rodeio = require("../src/models/Rodeio");
 const Resultado = require("../src/models/Resultado");
 const Regiao = require("../src/models/Regiao");
+const Usuario = require("../src/models/Usuario");
 
 const entidades = require("./entidades");
 const rodeios = require("./rodeios");
-const resultados = require('./resultados');
-const regioes = require('./regioes');
+const resultados = require("./resultados");
+const regioes = require("./regioes");
 
 //==================================================
 // LIMPAR DB
@@ -23,6 +24,9 @@ async function cleanDB() {
 
   await Regiao.remove({});
   console.log("-> Coleção REGIAO removida.");
+
+  await Usuario.remove({});
+  console.log("-> Coleção USUARIO removida.");
 }
 
 //==================================================
@@ -32,7 +36,7 @@ async function mapRegioes() {
   regioes.map(async regiao => {
     const newRegiao = await Regiao.create(regiao);
     console.log(`-> ${newRegiao.numero}RT adicionada.`);
-  })
+  });
 }
 
 //==================================================
@@ -44,7 +48,7 @@ async function mapEntidades() {
     await newEntidade.save();
     return console.log(`-> Entidade '${newEntidade.nome}' cadastrada.`);
   });
-};
+}
 
 //==================================================
 // CADASTRAR RODEIOS
@@ -58,14 +62,14 @@ async function mapRodeios() {
     newRodeio.entidade.id = foundEntidade._id;
     await newRodeio.save();
 
-    const newRodeioData = {id: newRodeio._id, nome: newRodeio.nome };
+    const newRodeioData = { id: newRodeio._id, nome: newRodeio.nome };
 
     foundEntidade.rodeios.push(newRodeioData);
     foundEntidade.save();
 
     return console.log(`-> Rodeio '${newRodeio.nome}' cadastrado.`);
   });
-};
+}
 
 //==================================================
 // CADASTRAR RESULTADOS
@@ -77,21 +81,26 @@ async function mapResultados() {
     //calcula nota FINAl para cada entrada
     newResultado.dados.map(entrada => {
       const { correcao, harmonia, interpretacao, musica, desconto } = entrada;
-      return entrada.final = correcao + harmonia + interpretacao + musica - desconto;
+      return (entrada.final =
+        correcao + harmonia + interpretacao + musica - desconto);
     });
 
     //Adiciona o ID do RESULTADO na ENTIDADE localizada
     newResultado.dados.map(async entrada => {
-      const foundEntidade = await Entidade.findOne({nome: entrada.entidade.nome});
+      const foundEntidade = await Entidade.findOne({
+        nome: entrada.entidade.nome
+      });
       foundEntidade.resultados.push(newResultado._id);
       await foundEntidade.save();
     });
 
     //Adiciona o ID da ENTIDADE na entrada correspondente a ela
     newResultado.dados.map(async entrada => {
-    const foundEntidade = await Entidade.findOne({nome: entrada.entidade.nome});
-    return entrada.entidade.id = foundEntidade._id;
-    })
+      const foundEntidade = await Entidade.findOne({
+        nome: entrada.entidade.nome
+      });
+      return (entrada.entidade.id = foundEntidade._id);
+    });
 
     //adiciona o ID do RESULTADO no RODEIO correspondente
     const foundRodeio = await Rodeio.findOne({ nome: resultado.rodeio.nome });
@@ -107,7 +116,7 @@ async function mapResultados() {
       `-> Resultado '${newResultado.modalidade}' adicionado para o rodeio '${newResultado.rodeio.nome}'.`
     );
   });
-};
+}
 
 module.exports = {
   async seedDB() {
@@ -116,34 +125,34 @@ module.exports = {
     console.log("--------------------");
     await cleanDB();
 
-    setTimeout(async() => {
+    setTimeout(async () => {
       console.log("--------------------");
       console.log("Cadastrando Regiões:");
       await mapRegioes();
-    },2000);
+    }, 2000);
 
-    setTimeout(async() => {
+    setTimeout(async () => {
       console.log("--------------------");
       console.log("Cadastrando Entidades:");
       await mapEntidades();
-    },15000);
+    }, 15000);
 
-    setTimeout(async() => {
+    setTimeout(async () => {
       console.log("--------------------");
       console.log("Cadastrando Rodeios:");
       await mapRodeios();
-    },20000);
+    }, 20000);
 
-    setTimeout(async() => {
+    setTimeout(async () => {
       console.log("--------------------");
       console.log("Cadastrando Resultados:");
       await mapResultados();
-    },25000);
+    }, 25000);
 
-    setTimeout(async() => {
+    setTimeout(async () => {
       console.log("--------------------");
       console.log("Preenchimento de DB finalizado.");
       console.log("--------------------");
-    },30000);
+    }, 30000);
   }
 };
