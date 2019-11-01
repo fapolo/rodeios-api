@@ -4,6 +4,7 @@ const rodeioController = require("./controllers/RodeioController");
 const resultadoController = require("./controllers/ResultadoController");
 const regiaoController = require("./controllers/RegiaoController");
 const usuarioController = require("./controllers/usuarioController");
+const authController = require("./controllers/AuthController");
 
 const routes = express.Router();
 
@@ -29,5 +30,7 @@ routes.get("/regioes", regiaoController.index);
 //afim de utilizar para automatização ao cadastrar uma entidade no frontend
 
 routes.post("/usuarios", usuarioController.store);
+
+routes.post("/auth", authController.create);
 
 module.exports = routes;

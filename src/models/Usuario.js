@@ -12,7 +12,15 @@ const usuarioSchema = new mongoose.Schema({
         ref: "Rodeio"
       }
     }
-  ]
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 module.exports = mongoose.model("Usuario", usuarioSchema);

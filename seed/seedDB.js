@@ -10,6 +10,15 @@ const resultados = require("./resultados");
 const regioes = require("./regioes");
 
 //==================================================
+// RECUPERA USUARIO
+//==================================================
+  async function getUserId() {
+    const email = "fabricio.polo@gmail.com"
+    const user = await Usuario.findOne({ email });
+    return user._id;
+}  
+
+//==================================================
 // LIMPAR DB
 //==================================================
 async function cleanDB() {
@@ -24,9 +33,7 @@ async function cleanDB() {
 
   await Regiao.remove({});
   console.log("-> Coleção REGIAO removida.");
-
-  await Usuario.remove({});
-  console.log("-> Coleção USUARIO removida.");
+  
 }
 
 //==================================================
@@ -45,6 +52,8 @@ async function mapRegioes() {
 async function mapEntidades() {
   entidades.map(async entidade => {
     const newEntidade = await Entidade.create(entidade);
+    newEntidade.createdAt.usuario = await getUserId();
+    newEntidade.updatedAt.usuario = await getUserId();
     await newEntidade.save();
     return console.log(`-> Entidade '${newEntidade.nome}' cadastrada.`);
   });
@@ -60,6 +69,7 @@ async function mapRodeios() {
       nome: rodeio.entidade.nome
     });
     newRodeio.entidade.id = foundEntidade._id;
+    newRodeio.usuario = await getUserId();
     await newRodeio.save();
 
     const newRodeioData = { id: newRodeio._id, nome: newRodeio.nome };

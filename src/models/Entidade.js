@@ -19,7 +19,27 @@ const entidadeSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Resultado"
     }
-  ]
+  ],
+  createdAt: {
+    date: {
+      type: Date,
+      default: Date.now()
+    },
+    usuario: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Usuario"
+    }
+  },
+  updatedAt: {
+    date: {
+      type: Date,
+      default: Date.now()
+    },
+    usuario: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Usuario"
+    }
+  }
 });
 
 module.exports = mongoose.model("Entidade", entidadeSchema);
