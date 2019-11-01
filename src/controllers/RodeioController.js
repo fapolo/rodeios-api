@@ -22,6 +22,9 @@ module.exports = {
     const { nome, data, organizador } = req.body;
     const authUser = req.userId; //ID passado no middleware de validação
 
+    if (!nome || !data || !organizador)
+      return res.status(400).json({ message: "Dados não autorizados." });
+
     try {
       let response = await Rodeio.findOne({ nome });
 

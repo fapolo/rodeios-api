@@ -5,6 +5,9 @@ module.exports = {
   async store(req, res) {
     const { senha, email, nome } = req.body;
 
+    if (!nome || !email || !senha)
+      return res.status(400).json({ message: "Dados não autorizados." });
+
     try {
       const usuario = await Usuario.findOne({ email });
       if (usuario) return res.status(400).json({message: "Usuário já existe"});

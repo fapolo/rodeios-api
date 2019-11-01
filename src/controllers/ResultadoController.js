@@ -6,6 +6,9 @@ module.exports = {
   async store(req, res) {
     const { rodeio, modalidade, dados } = req.body;
 
+    if (!rodeio || !modalidade || !dados)
+      return res.status(400).json({ message: "Dados não autorizados." });
+
     try {
       // //verifica se rodeio existe
       const foundRodeio = await Rodeio.findById(rodeio);
