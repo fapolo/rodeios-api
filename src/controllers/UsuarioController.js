@@ -3,9 +3,12 @@ const bcrytpt = require("bcrypt");
 
 module.exports = {
   async store(req, res) {
-    const { senha } = req.body;
+    const { senha, email } = req.body;
 
     try {
+      const usuario = await Usuario.findOne({ email });
+      if (usuario) return res.status(400).json({message: "Usuário já existe"});
+
       const hash = await bcrytpt.hash(senha, 10);
       if (!hash)
         return res.status(500).json({ message: "Erro ao criar usuário." });

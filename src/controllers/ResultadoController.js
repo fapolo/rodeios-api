@@ -5,10 +5,11 @@ const Rodeio = require('../models/Rodeio');
 module.exports = {
   async store(req, res) {
     const { rodeio, modalidade, dados } = req.body;
+
     try {
       // //verifica se rodeio existe
       const foundRodeio = await Rodeio.findById(rodeio);
-      if (!foundRodeio) {res.json({message: "Rodeio não localizado"})};
+      if (!foundRodeio) return res.json({message: "Rodeio não localizado"});
 
       //calcular a nota final
       dados.map((pos, i) => {

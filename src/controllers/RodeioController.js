@@ -19,6 +19,8 @@ module.exports = {
   },
 
   async store(req, res) {
+    const authUser = req.userId; //ID passado no middleware de validação
+
     try {
       const { nome, data, organizador } = req.body;
 
@@ -31,7 +33,8 @@ module.exports = {
       response = await Rodeio.create({
         nome,
         data,
-        organizador
+        organizador,
+        usuario: authUser
       });
 
       await response.save();
@@ -64,13 +67,19 @@ module.exports = {
   },
 
   async update(req, res) {
+    const authUser = req.userId; //ID passado no middleware de validação
+
     try {
       const rodeio = await Rodeio.findById(req.params.rodeio_id);
       if (!rodeio) {
         return res.status(400).json({ message: "Rodeio não localizado." });
       }
 
+      if (rodeio.usuario.toString() !== authUser.toString())
+        return res.status(400).json({ message: "Acesso negado."});
+        
       let dados = {};
+      dados.updatedAt = Date.now();
       if (req.body.nome) dados.nome = req.body.nome;
       if (req.body.data) dados.cidade = req.body.data;
       if (req.body.organizador) dados.rt = req.body.organizador;
@@ -91,6 +100,8 @@ module.exports = {
   },
 
   async delete(req, res) {
+    const authUser = req.userId; //ID passado no middleware de validação
+
     try {
       //procura pelo rodeio passado
       const rodeio = await Rodeio.findById(req.params.rodeio_id).populate(
@@ -99,6 +110,10 @@ module.exports = {
       if (!rodeio) {
         return res.status(400).json({ message: "Rodeio não localizado." });
       }
+
+      //verifica que o usuário logado é o dono do rodeio
+      if (rodeio.usuario.toString() !== authUser.toString())
+        return res.status(401).json({ message: "Sem autorização."});
 
       //remover a entrada de resultado das entidades que participaram do rodeio
       const { resultado } = rodeio;

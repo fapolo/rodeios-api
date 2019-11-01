@@ -15,8 +15,10 @@ module.exports = {
   },
 
   async store(req, res) {
+    const { nome, cidade, rt } = req.body;
+    const authUser = req.userId; //ID passado no middleware de validação
+    
     try {
-      const { nome, cidade, rt } = req.body;
 
       let response = await Entidade.findOne({ nome });
 
@@ -29,7 +31,8 @@ module.exports = {
         cidade,
         rt
       });
-
+      response.createdAt.usuario = authUser;
+      response.updatedAt.usuario = authUser;
       await response.save();
 
       return res.json(response);
@@ -58,6 +61,8 @@ module.exports = {
   },
 
   async update(req, res) {
+    const authUser = req.userId; //ID passado no middleware de validação
+    
     try {
       const entidade = await Entidade.findById(req.params.entidade_id);
       if (!entidade) {
@@ -65,6 +70,7 @@ module.exports = {
       }
 
       let dados = {};
+      dados.updatedAt = {date: Date.now(), usuario: authUser };
       if (req.body.nome) dados.nome = req.body.nome;
       if (req.body.cidade) dados.cidade = req.body.cidade;
       if (req.body.rt) dados.rt = req.body.rt;
