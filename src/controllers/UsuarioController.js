@@ -3,7 +3,7 @@ const bcrytpt = require("bcrypt");
 
 module.exports = {
   async store(req, res) {
-    const { senha, email } = req.body;
+    const { senha, email, nome } = req.body;
 
     try {
       const usuario = await Usuario.findOne({ email });
@@ -13,10 +13,11 @@ module.exports = {
       if (!hash)
         return res.status(500).json({ message: "Erro ao criar usuário." });
 
-      const response = await Usuario.create(req.body);
-
-      response.senha = hash;
-
+      const response = await Usuario.create({
+        nome,
+        email,
+        senha: hash
+      });
       await response.save();
 
       response.senha = undefined;

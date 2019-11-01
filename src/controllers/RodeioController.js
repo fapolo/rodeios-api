@@ -19,11 +19,10 @@ module.exports = {
   },
 
   async store(req, res) {
+    const { nome, data, organizador } = req.body;
     const authUser = req.userId; //ID passado no middleware de validação
 
     try {
-      const { nome, data, organizador } = req.body;
-
       let response = await Rodeio.findOne({ nome });
 
       if (response) {

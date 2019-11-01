@@ -17,6 +17,9 @@ module.exports = {
   async store(req, res) {
     const { nome, cidade, rt } = req.body;
     const authUser = req.userId; //ID passado no middleware de validação
+
+    if (!nome || !cidade || !rt)
+      return res.status(400).json({ message: "Dados não autorizados." });
     
     try {
 
@@ -62,12 +65,11 @@ module.exports = {
 
   async update(req, res) {
     const authUser = req.userId; //ID passado no middleware de validação
-    
+
     try {
       const entidade = await Entidade.findById(req.params.entidade_id);
-      if (!entidade) {
+      if (!entidade)
         return res.status(400).json({ message: "Entidade não localizada." });
-      }
 
       let dados = {};
       dados.updatedAt = {date: Date.now(), usuario: authUser };
