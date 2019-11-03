@@ -5,10 +5,15 @@ const Resultado = require("../models/Resultado");
 module.exports = {
   async index(req, res) {
     try {
-      const response = await Rodeio.find({}).populate(
-        "organizador resultado",
-        "nome modalidade dados"
+      const response = await Rodeio.paginate(
+        {},
+        {
+          limit: 8,
+          sort: { data: -1 },
+          populate: "resultado"
+        }
       );
+
       return res.json(response);
     } catch (error) {
       console.log("---> ERRO ao recuperar rodeios:");
@@ -78,8 +83,8 @@ module.exports = {
       }
 
       if (rodeio.usuario.toString() !== authUser.toString())
-        return res.status(400).json({ message: "Acesso negado."});
-        
+        return res.status(400).json({ message: "Acesso negado." });
+
       let dados = {};
       dados.updatedAt = Date.now();
       if (req.body.nome) dados.nome = req.body.nome;
@@ -115,7 +120,7 @@ module.exports = {
 
       //verifica que o usuário logado é o dono do rodeio
       if (rodeio.usuario.toString() !== authUser.toString())
-        return res.status(401).json({ message: "Sem autorização."});
+        return res.status(401).json({ message: "Sem autorização." });
 
       //remover a entrada de resultado das entidades que participaram do rodeio
       const { resultado } = rodeio;

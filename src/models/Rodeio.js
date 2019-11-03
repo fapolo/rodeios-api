@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate");
 
 const rodeioSchema = new mongoose.Schema({
   nome: String,
@@ -29,5 +30,7 @@ const rodeioSchema = new mongoose.Schema({
     default: Date.now()
   }
 });
+
+rodeioSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model("Rodeio", rodeioSchema);
