@@ -1,6 +1,7 @@
 const Rodeio = require("../models/Rodeio");
 const Entidade = require("../models/Entidade");
 const Resultado = require("../models/Resultado");
+const Usuario = require("../models/Usuario");
 
 module.exports = {
   async index(req, res) {
@@ -31,22 +32,28 @@ module.exports = {
       return res.status(400).json({ message: "Dados não autorizados." });
 
     try {
-      let response = await Rodeio.findOne({ nome });
+      let rodeio = await Rodeio.findOne({ nome });
+      if (rodeio) return res.status(400).json({ message: "Rodeio já existe." });
 
-      if (response) {
-        return res.json({ message: "Rodeio já existe." });
-      }
+      //procurar usuário logado
+      let user = await Usuario.findById(authUser);
+      if (!user)
+        return res.status(401).json({ message: "Usuário não localizado." });
 
-      response = await Rodeio.create({
+      //cria o novo rodeio
+      rodeio = await Rodeio.create({
         nome,
         data,
         organizador,
         usuario: authUser
       });
+      await rodeio.save();
 
-      await response.save();
+      //salva ID do rodeio no usuário
+      user.rodeios.push(rodeio._id);
+      await user.save();
 
-      return res.json(response);
+      return res.json(rodeio);
     } catch (error) {
       console.log("---> ERRO ao criar novo rodeio:");
       console.log(error);
@@ -60,6 +67,7 @@ module.exports = {
       const rodeio = await Rodeio.findById(req.params.rodeio_id).populate(
         "resultado"
       );
+
       if (!rodeio) {
         return res.status(400).json({ message: "Rodeio não localizado." });
       }

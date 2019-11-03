@@ -6,11 +6,8 @@ const usuarioSchema = new mongoose.Schema({
   senha: String,
   rodeios: [
     {
-      _id: false,
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Rodeio"
-      }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rodeio"
     }
   ],
   createdAt: {
