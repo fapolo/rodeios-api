@@ -108,6 +108,6 @@ Qualquer atributo não previsto _não será adicionado_. Não informar um destes
 
 Atualiza o rodeio referenciada no ID passado como `:rodeio_id`. Requer um usuário autenticado, que será associado ao atributo `updatedAt` e deve ser o mesmo usuário que cadastrou o rodeio, do contrário a alteração dos dados não será autorizada. Os campos permitidos são os mesmos da criação, porém não são obrigatórios serem informados em conjunto.
 
-**`PUT /rodeios/:rodeio_id`**
+**`DELETE /rodeios/:rodeio_id`**
 
 Permite a exclusão do rodeio referenciado no ID passado como `:rodeio_id`. Requer um usuário autenticado que deve ser o mesmo usuário que cadastrou o rodeio, do contrário a exclusão não será autorizada. Ao excluir o rodeio, ele será _removido do banco de dados_, portanto não há retorno. Junto com ele todos os resultados que pertencem ao rodeio serão removidos, bem como seu ID será removido da entidade organizadora.
