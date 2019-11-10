@@ -63,7 +63,7 @@ Atualiza a entidade referenciada no ID passado como `:entidade_id`. Requer um us
 
 ## Rodeios
 
-Endpoints específicos para tratar dos rodeios. São considerados _Rodeios_ os eventos organizados por Entidades, onde estas mesmas entidades podem participar como concorrentes nas diversas modalidades existentes. Cada Rodeio é propriedade de um usuário e, diferente das entidades, somente este usuário pode fazer alterações. **Importante**: _Rodeio_ é separado dos _Resultados_, considerando que um rodeio pode mais do que um único resultado. As rotas de Rodeios referem-se somente aos dados básicos do rodeio, não ao resultado em si.
+Endpoints específicos para tratar dos rodeios. São considerados _Rodeios_ os eventos organizados por Entidades, onde estas mesmas entidades podem participar como concorrentes nas diversas modalidades existentes. Cada Rodeio é propriedade de um usuário e, diferente das entidades, somente este usuário pode fazer alterações. **Importante**: _Rodeio_ é separado dos _Resultados_, considerando que um rodeio aceita mais do que um resultado. As rotas de Rodeios referem-se somente aos dados básicos do rodeio, não ao resultado em si.
 
 ### Estrutura de um Rodeio
 
@@ -96,7 +96,7 @@ Cadastra um novo rodeio. Requer um usuário autenticado, que será associado ao 
   "nome": "XXI Sarau da Arte Gaúcha",
   "data": "2019-06-09",
   "organizador": {
-    "id": "123456789123456789", //_id referente à entidade organizadora
+    "id": "123456789123456789",
     "nome": "CTG M'Bororé"
   }
 }
